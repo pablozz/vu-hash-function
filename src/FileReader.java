@@ -1,11 +1,10 @@
-package utils;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
 public class FileReader {
+
     private String readUserInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter file name:");
@@ -22,6 +21,6 @@ public class FileReader {
             System.out.println("Couldn't read this file");
         }
 
-        return null;
+        return "";
     }
 }
