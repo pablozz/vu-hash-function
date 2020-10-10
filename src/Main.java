@@ -14,8 +14,9 @@ public class Main {
 //        System.out.println(hash);
 
 
-        HashTest test = new HashTest(input);
+        HashTest test = new HashTest();
 
-        test.hashByLine();
+//        test.hashByLine(input);
+        test.testCollisionResistance();
     }
 }
