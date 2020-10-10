@@ -7,7 +7,7 @@ public class FileReader {
 
     private String readUserInput() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter file name:");
+        System.out.println("Enter a file name:");
 
         return scanner.nextLine();
     }
@@ -24,3 +24,6 @@ public class FileReader {
         return "";
     }
 }
+
+//77df3bcb8269d3dd21ab4691907fefe9db7eff953a68e9edf297f669a13fd375
+//77df3bcb8269d3dd21ab4691907fefe9db7eff953a68e9edf297f669a13fd375
