@@ -8,20 +8,17 @@ public class HashGenerator {
         int hashInt = 0;
 
         for (int inputElem : input.toCharArray()) {
-            hashInt += Math.pow(inputElem, 3);
-            hashInt += ~inputElem % ~hashInt;
-            hashInt += ~hashInt << hashInt;
+            hashInt = stirChar(hashInt, inputElem);
         }
 
         StringBuilder hashBuilder = new StringBuilder(Integer.toHexString(hashInt));
 
         while (hashBuilder.length() != HASH_LENGTH) {
             for (int hashElem : hashBuilder.toString().toCharArray()){
-                hashElem += (hashElem + ~hashBuilder.length()) * hashInt >> 3;
-                hashElem += (hashInt ^ hashElem) | (hashInt | hashElem);
-                hashElem += hashElem >> 3;
+                hashInt = stirChar(hashInt, hashElem);
 
-                hashBuilder.append(Integer.toHexString(hashElem));
+                hashBuilder.append(Integer.toHexString(hashInt));
+
             }
 
             int hashLength = hashBuilder.length();
@@ -31,5 +28,13 @@ public class HashGenerator {
         }
 
         return  hashBuilder.toString();
+    }
+
+    private int stirChar(int hashInt, int elem) {
+        hashInt += Math.pow(elem, 3);
+        hashInt += ~elem % ~hashInt;
+        hashInt += ~hashInt << ~hashInt << 1;
+
+        return hashInt;
     }
 }

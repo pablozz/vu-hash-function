@@ -41,6 +41,8 @@ public class HashTest {
             String firstHash = allWords.get(i).getFirstWordHash();
             String secondHash = allWords.get(i).getSecondWordHash();
 
+            System.out.println(firstHash + " | " + secondHash);
+
             if(firstHash.equals(secondHash)) {
                 collisionsCount++;
 
@@ -48,7 +50,7 @@ public class HashTest {
             }
         }
 
-        System.out.println(collisionsCount);
+        System.out.println("Collisions: " + collisionsCount);
     }
 
     private ArrayList<WordPair> generateRandomWordsArray(int wordLength) {
