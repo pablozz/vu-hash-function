@@ -1,3 +1,5 @@
+package core;
+
 public class HashGenerator {
 
     public final int HASH_LENGTH = 64;
@@ -8,7 +10,7 @@ public class HashGenerator {
         for (int inputElem : input.toCharArray()) {
             hashInt += Math.pow(inputElem, 3);
             hashInt += ~inputElem % ~hashInt;
-            hashInt += hashInt << 5;
+            hashInt += ~hashInt << hashInt;
         }
 
         StringBuilder hashBuilder = new StringBuilder(Integer.toHexString(hashInt));

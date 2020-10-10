@@ -1,12 +1,21 @@
+import core.HashGenerator;
+import core.InputReader;
+import tests.HashTest;
+
 public class Main {
 
     public static void main(String[] args) {
-        FileReader fileReader = new FileReader();
-        String fileContent = fileReader.readStringFromFile(args);
+        InputReader inputReader = new InputReader();
+        String input = inputReader.readString(args);
 
-        HashGenerator hashGenerator = new HashGenerator();
-        String hash = hashGenerator.getHash(fileContent);
+//        HashGenerator hashGenerator = new HashGenerator();
+//        String hash = hashGenerator.getHash(content);
 
-        System.out.println(hash);
+//        System.out.println(hash);
+
+
+        HashTest test = new HashTest(input);
+
+        test.hashByLine();
     }
 }
