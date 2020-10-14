@@ -6,25 +6,23 @@ public class Main {
 
     public static void main(String[] args) {
         InputReader inputReader = new InputReader();
-        String input = inputReader.readString(args);
 
-        HashGenerator hashGenerator = new HashGenerator();
-//        String hash = hashGenerator.getHash(content);
+        String programType = inputReader.readUserInput("1 - hash input; 2 - test:");
 
-//        System.out.println(hash);
+        if (programType.equals("1")) {
+            String input = inputReader.readString(args);
 
+            HashGenerator hashGenerator = new HashGenerator();
+            String hash = hashGenerator.getHash(input);
 
-//        HashTest test = new HashTest();
-
-        System.out.println(hashGenerator.getHash("a"));
-        System.out.println(hashGenerator.getHash("b"));
-        System.out.println("");
-        System.out.println(hashGenerator.getHash("asdajias1ndnsaoinas5oinvasoivnasodinvoiAN3OIASNViu5BNACVIUBYUIBuyBVUYvbUOIYBIOYUBOIuybIUBI234Oub"));
-        System.out.println(hashGenerator.getHash("asdajias1ndnsaoinas5oinvasoivnasodinvoiAN3OIASNViu5BNACVIUBYUIBuyBVUYvbaOIYBIOYUBOIuybIUBI234Oub"));
-
-
-
-//        test.hashByLine(input);
-//        test.testCollisionResistance();
+            System.out.println(hash);
+        } else if (programType.equals("2")) {
+            HashTest test = new HashTest();
+            test.testHashByLine();
+            test.testCollisionResistance();
+            test.testAvalancheEffect();
+        } else {
+            System.out.println("Invalid input.");
+        }
     }
 }

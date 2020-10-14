@@ -7,24 +7,24 @@ import java.util.Scanner;
 
 public class InputReader {
 
-    private String readUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter an input to hash:");
-
-        return scanner.nextLine();
-    }
-
     public String readString(String[] args) {
-        if(args.length == 1) {
+        if (args.length == 1) {
             try {
                 return Files.readString(Path.of("./inputs/" + args[0]));
             } catch (IOException e) {
                 System.out.println("Couldn't read this file");
             }
         } else {
-            return readUserInput();
+            return readUserInput("Enter an input to hash:");
         }
 
         return "";
+    }
+
+    public String readUserInput(String output) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(output);
+
+        return scanner.nextLine();
     }
 }

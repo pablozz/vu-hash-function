@@ -18,7 +18,6 @@ public class HashGenerator {
                 hashInt = stirChar(hashInt, hashElem);
 
                 hashBuilder.append(Integer.toHexString(hashInt));
-
             }
 
             int hashLength = hashBuilder.length();
