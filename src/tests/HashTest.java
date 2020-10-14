@@ -18,7 +18,7 @@ public class HashTest {
     public void testHashByLine() {
         long start = System.currentTimeMillis();
 
-        String text = null;
+        String text;
         try {
             text = Files.readString(Path.of("./inputs/konstitucija.txt"));
             Scanner scanner = new Scanner(text);
