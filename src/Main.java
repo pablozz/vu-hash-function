@@ -10,7 +10,7 @@ public class Main {
         String programType = inputReader.readUserInput("1 - hash input; 2 - test:");
 
         if (programType.equals("1")) {
-            String input = inputReader.readString(args);
+            String input = inputReader.readStringFromArgs(args);
 
             HashGenerator hashGenerator = new HashGenerator();
             String hash = hashGenerator.getHash(input);
@@ -18,6 +18,8 @@ public class Main {
             System.out.println(hash);
         } else if (programType.equals("2")) {
             HashTest test = new HashTest();
+            test.testHashLength();
+            test.testHashDeterminism();
             test.testHashByLine();
             test.testCollisionResistance();
             test.testAvalancheEffect();

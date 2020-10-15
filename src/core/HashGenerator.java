@@ -32,7 +32,7 @@ public class HashGenerator {
     private int stirChar(int hashInt, int elem) {
         hashInt += Math.pow(elem, 3);
         hashInt += ~elem % ~hashInt;
-        hashInt += ~hashInt << ~hashInt << 1;
+        hashInt += hashInt << ~hashInt << 1;
 
         return hashInt;
     }

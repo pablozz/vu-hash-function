@@ -7,7 +7,16 @@ import java.util.Scanner;
 
 public class InputReader {
 
-    public String readString(String[] args) {
+    public String readFile(String fileName) {
+        try {
+            return Files.readString(Path.of("./inputs/" + fileName));
+        } catch (IOException e) {
+            System.out.println("Couldn't read this file");
+            return null;
+        }
+    }
+
+    public String readStringFromArgs(String[] args) {
         if (args.length == 1) {
             try {
                 return Files.readString(Path.of("./inputs/" + args[0]));

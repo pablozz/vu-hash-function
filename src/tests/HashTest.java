@@ -1,6 +1,7 @@
 package tests;
 
 import core.HashGenerator;
+import core.InputReader;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,14 +14,39 @@ public class HashTest {
 
     private final HashGenerator hashGenerator = new HashGenerator();
     private final Random random = new Random();
+    private final InputReader inputReader = new InputReader();
 
+    public void testHashLength() {
+        String stringLen1 = inputReader.readFile("char1.txt");
+        String stringLen2 = inputReader.readFile("long_string1.txt");
+        String hash1 = hashGenerator.getHash(stringLen1);
+        String hash2 = hashGenerator.getHash(stringLen2);
+
+        System.out.println("Test 1, 2:");
+        System.out.println("Hash 1: " + hash1);
+        System.out.println("Hash 2: " + hash2);
+        System.out.println("String length: " + stringLen1.length() + "; Hash length: " + hash1.length());
+        System.out.println("String length: " + stringLen2.length() + "; Hash length: " + hash2.length());
+    }
+
+    public void testHashDeterminism() {
+        String string1 = inputReader.readFile("long_string1.txt");
+        String string2 = inputReader.readFile("long_string1.txt");
+        String hash1 = hashGenerator.getHash(string1);
+        String hash2 = hashGenerator.getHash(string2);
+
+        System.out.println("\nTest 3:");
+        System.out.println("Hash 1: " + hash1);
+        System.out.println("Hash 2: " + hash2);
+        System.out.println(("Hashes from same string are equal: " + hash1.equals(hash2)));
+    }
 
     public void testHashByLine() {
         long start = System.currentTimeMillis();
 
-        String text;
-        try {
-            text = Files.readString(Path.of("./inputs/konstitucija.txt"));
+        String text = inputReader.readFile("konstitucija.txt");
+
+        if(text != null) {
             Scanner scanner = new Scanner(text);
 
             while (scanner.hasNextLine()) {
@@ -32,9 +58,8 @@ public class HashTest {
 
             long finish = System.currentTimeMillis();
 
+            System.out.println("\nTest 4:");
             System.out.println("Time it took to hash every line of \"konstitucija.txt\": " + (finish - start) + "ms");
-        } catch (IOException e) {
-            System.out.println("Couldn't find file named \"konstitucija.txt\"");
         }
     }
 
@@ -55,16 +80,18 @@ public class HashTest {
             }
         }
 
+        System.out.println("\nTest 6:");
         System.out.println("Collisions: " + collisionsCount + "/" + allWordPairs.size());
     }
 
     public void testAvalancheEffect() {
-
         ArrayList<WordPair> allWordPairs = new ArrayList<>();
         allWordPairs.addAll(generateRandomSimilarWordsArray(10));
         allWordPairs.addAll(generateRandomSimilarWordsArray(100));
         allWordPairs.addAll(generateRandomSimilarWordsArray(500));
         allWordPairs.addAll(generateRandomSimilarWordsArray(1000));
+
+        System.out.println("\nTest 5, 7:");
 
         double equalBitPercentageSum = 0;
         for (WordPair wordPair: allWordPairs) {
