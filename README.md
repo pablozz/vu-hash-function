@@ -9,3 +9,7 @@
 ### Testai
 
 ![Alt text](readmeResources/tests.png "Tests")
+
+### Išvados
+
+Hash algoritmas atitinka reikalavimus, tačiau nėra optimalaus greičio.
