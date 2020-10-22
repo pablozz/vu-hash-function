@@ -3,9 +3,6 @@ package tests;
 import core.HashGenerator;
 import core.InputReader;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -94,6 +91,9 @@ public class HashTest {
         System.out.println("\nTest 5, 7:");
 
         double equalBitPercentageSum = 0;
+        double minEqualBitPercentage = 100;
+        double maxEqualBitPercentage = 0;
+
         for (WordPair wordPair: allWordPairs) {
             int hashLength = wordPair.getHashLength();
             int equalBitsCount = 0;
@@ -106,21 +106,37 @@ public class HashTest {
                 String firstHashBinaryWithLeadingZeros = String.format("%8s", firstHashBinary).replace(' ', '0');
                 String secondHashBinaryWithLeadingZeros = String.format("%8s", secondHashBinary).replace(' ', '0');
 
-                for(int j = 0; j < 8; j++) {
+                for (int j = 0; j < 8; j++) {
                     if(firstHashBinaryWithLeadingZeros.charAt(j) == secondHashBinaryWithLeadingZeros.charAt(j)) {
                         equalBitsCount++;
                     }
                 }
             }
-            equalBitPercentageSum += ((double) equalBitsCount * 100) / (hashLength * 8);
+
+            double equalBitsPercentage = ((double) equalBitsCount * 100) / (hashLength * 8);
+
+            if (equalBitsPercentage < minEqualBitPercentage) {
+                minEqualBitPercentage = equalBitsPercentage;
+            }
+
+            if (equalBitsPercentage > maxEqualBitPercentage) {
+                maxEqualBitPercentage = equalBitsPercentage;
+            }
+
+            equalBitPercentageSum += equalBitsPercentage;
         }
 
         double equalBitPercentage = equalBitPercentageSum / allWordPairs.size();
 
+        System.out.printf("Minimal percentage of equal bits: %.2f\n", minEqualBitPercentage);
+        System.out.printf("Maximal percentage of equal bits: %.2f\n", maxEqualBitPercentage);
         System.out.printf("Percentage of equal bits: %.2f", equalBitPercentage);
         System.out.print("%\n");
 
         double equalHashPercentageSum = 0;
+        double minEqualHashPercentage = 100;
+        double maxEqualHashPercentage = 0;
+
         for (WordPair wordPair: allWordPairs) {
             int hashLength = wordPair.getHashLength();
             int equalHashSymbolsCount = 0;
@@ -129,9 +145,22 @@ public class HashTest {
                     equalHashSymbolsCount++;
                 }
             }
-            equalHashPercentageSum += (double) equalHashSymbolsCount * 100 / hashLength;
+
+            double equalHashPercentage = (double) equalHashSymbolsCount * 100 / hashLength;
+
+            if (equalHashPercentage < minEqualHashPercentage) {
+                minEqualHashPercentage = equalHashPercentage;
+            }
+
+            if (equalHashPercentage > maxEqualHashPercentage) {
+                maxEqualHashPercentage = equalHashPercentage;
+            }
+
+            equalHashPercentageSum += equalHashPercentage;
         }
 
+        System.out.printf("Minimal percentage of equal hash characters: %.2f\n", minEqualHashPercentage);
+        System.out.printf("Maximal percentage of equal hash characters: %.2f\n", maxEqualHashPercentage);
         System.out.printf("Percentage of equal hash symbols: %.2f", equalHashPercentageSum / allWordPairs.size());
         System.out.print('%');
     }
