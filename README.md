@@ -96,7 +96,10 @@ Hash algoritmas atitinka reikalavimus
 
 #### Pranašumai:
 
-Maža kolizijos tikimybė
+- Bent iš dalies atitinka visus reikalavimų punktus.
 
 #### Trūkumai:
-Algoritmas nėra optimalaus greičio.
+
+- Algoritmas nėra optimalaus greičio.
+- Esant labai panašioms įvestims padidėja kolizijos tikimybė.
+
